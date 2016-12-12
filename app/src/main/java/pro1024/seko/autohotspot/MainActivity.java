@@ -8,20 +8,27 @@ import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    static WifiAP wifiAp;
+    private WifiManager wifi;
     private MyReceiver myReceiver;
-    private WifiManager wifiManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initReceiver();
+        wifiAp = new WifiAP();
+        wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+        initReceiver();
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_DIM_BEHIND);
     }
 
     private void initReceiver(){
@@ -43,19 +50,9 @@ public class MainActivity extends AppCompatActivity {
     public class MyReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent){
-            wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
             TextView textView_1 = (TextView)findViewById(R.id.textView_1);
             TextView textView_2 = (TextView)findViewById(R.id.textView_2);
-            /*if (intent.getAction().equalsIgnoreCase("android.intent.action.ACTION_POWER_CONNECTED")){
-                wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-                wifiManager.setWifiEnabled(true);
-
-            }
-            else {
-                wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-                wifiManager.setWifiEnabled(false);
-            }*/
-
+            TextView textView_3 = (TextView)findViewById(R.id.textView_3);
 
             IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
             Intent batteryStatus = context.registerReceiver(null, filter);
@@ -65,17 +62,31 @@ public class MainActivity extends AppCompatActivity {
                     status == BatteryManager.BATTERY_STATUS_FULL;
 
             if (isCharging == true){
-                wifiManager.setWifiEnabled(false);
+                if (wifiAp.getWifiAPState()==wifiAp.WIFI_AP_STATE_ENABLED || wifiAp.getWifiAPState()==wifiAp.WIFI_AP_STATE_ENABLING) {
+                } else {
+                    wifiAp.toggleWiFiAP(wifi, MainActivity.this);
+                }
                 textView_1.setText("Ladowarka podlaczona");
                 textView_2.setText("WiFi wylaczone");
-                //Toast.makeText(getApplicationContext(), "Ladowarka podlaczona, WiFi wylaczone.", Toast.LENGTH_SHORT).show();
-            }
-            if(isCharging == false) {
-                wifiManager.setWifiEnabled(true);
+                textView_3.setText("Tethering wlaczony");
+            }else {
+                if (wifiAp.getWifiAPState()==wifiAp.WIFI_AP_STATE_ENABLED || wifiAp.getWifiAPState()==wifiAp.WIFI_AP_STATE_ENABLING) {
+                    wifiAp.toggleWiFiAP(wifi, MainActivity.this);
+                }
                 textView_1.setText("Ladowarka ODLACZONA");
                 textView_2.setText("WiFi WLACZONE");
-                //Toast.makeText(getApplicationContext(), "Ladowarka ODLACZONA, WiFi WLACZONE.", Toast.LENGTH_SHORT).show();
+                textView_3.setText("Tethering WYLACZONY");
             }
+        }
+    }
+
+    public static void updateStatusDisplay() {
+        if (wifiAp.getWifiAPState()==wifiAp.WIFI_AP_STATE_ENABLED || wifiAp.getWifiAPState()==wifiAp.WIFI_AP_STATE_ENABLING) {
+            //btnWifiToggle.setText("Turn off");
+            //findViewById(R.id.bg).setBackgroundResource(R.drawable.bg_wifi_on);
+        } else {
+            //btnWifiToggle.setText("Turn on");
+            //findViewById(R.id.bg).setBackgroundResource(R.drawable.bg_wifi_off);
         }
     }
 }
