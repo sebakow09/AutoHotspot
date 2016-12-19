@@ -10,8 +10,6 @@ import android.util.Log;
 
 import java.lang.reflect.Method;
 
-import pro1024.seko.autohotspot.MainActivity;
-
 public class WifiAP extends Activity {
     private static int constant = 0;
 
@@ -32,7 +30,15 @@ public class WifiAP extends Activity {
 
     private int stateWifiWasIn = -1;
 
-    private boolean alwaysEnableWifi = true; //set to false if you want to try and set wifi state back to what it was before wifi ap enabling, true will result in the wifi always being enabled after wifi ap is disabled
+    private boolean alwaysEnableWifi = false; //set to false if you want to try and set wifi state back to what it was before wifi ap enabling, true will result in the wifi always being enabled after wifi ap is disabled
+
+    /*public boolean onCheckboxClicked(){
+        CheckBox checkBox_1 = (CheckBox)findViewById(R.id.checkBox_1);
+        boolean alwaysEnableWifi;
+        if (checkBox_1.isChecked())alwaysEnableWifi = true;
+        else alwaysEnableWifi = true;
+        return alwaysEnableWifi;
+    }*/
 
     public void toggleWiFiAP(WifiManager wifihandler, Context context) {
         if (wifi==null){

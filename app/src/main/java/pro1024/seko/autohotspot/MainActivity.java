@@ -8,7 +8,6 @@ import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     static WifiAP wifiAp;
     private WifiManager wifi;
     private MyReceiver myReceiver;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         initReceiver();
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_DIM_BEHIND);
     }
 
     private void initReceiver(){
@@ -74,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     wifiAp.toggleWiFiAP(wifi, MainActivity.this);
                 }
                 textView_1.setText("Ladowarka ODLACZONA");
-                textView_2.setText("WiFi WLACZONE");
+                if (wifi.isWifiEnabled()) textView_2.setText("WiFi wlaczone");
+                else textView_2.setText("WiFi WYLACZONE");
                 textView_3.setText("Tethering WYLACZONY");
             }
         }

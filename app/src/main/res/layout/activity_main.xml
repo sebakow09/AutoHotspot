@@ -11,7 +11,7 @@
     tools:context="pro1024.seko.autohotspot.MainActivity">
 
     <TextView
-        android:text="Ladowarka :)"
+        android:text="@string/charger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,10 +20,11 @@
         android:id="@+id/textView_1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/colorText"/>
 
     <TextView
-        android:text="Wi-Fi :)"
+        android:text="@string/wifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView_2"
@@ -32,10 +33,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/colorText"/>
 
     <TextView
-        android:text="Tethering :)"
+        android:text="@string/tethering"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView_3"
@@ -44,5 +46,26 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/colorText"/>
+
+    <TextView
+        android:text="@string/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/textView_4"
+        android:textSize="8sp"
+        android:textColor="@color/colorText"/>
+
+    <!--<CheckBox
+        android:text="@string/wifi_on_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_3"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/checkBox_1"
+        android:textColor="@color/colorText"/>-->
 </RelativeLayout>

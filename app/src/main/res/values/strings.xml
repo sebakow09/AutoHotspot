@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AutoHotspot</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="charger">Charger</string>
+    <string name="tethering">Tethering</string>
+    <string name="version">Wersja aplikacji: 0.3</string>
+    <string name="wifi_on_off">Zaznacz, jeżeli chcesz włączyć wi-fi po odłączeniu ładowarki.</string>
 </resources>
