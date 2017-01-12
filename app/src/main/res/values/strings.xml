@@ -3,6 +3,7 @@
     <string name="wifi">Wi-Fi</string>
     <string name="charger">Charger</string>
     <string name="tethering">Tethering</string>
-    <string name="version">Wersja aplikacji: 0.3</string>
-    <string name="wifi_on_off">Zaznacz, jeżeli chcesz włączyć wi-fi po odłączeniu ładowarki.</string>
+    <string name="version">Wersja aplikacji: 0.4</string>
+    <string name="traffic_info">Traffic info</string>
+    <string name="usage_network_data">Użycie danych</string>
 </resources>
